@@ -479,7 +479,7 @@
             <a href="#features">Features</a>
             <a href="#pricing">Pricing</a>
             <a href="#faq">FAQ</a>
-            <a href="https://tally.so/r/682blB" target="_blank" class="nav-cta">Join Waitlist</a>
+            <a href="javascript:void(0)" onclick="openWaitlist()" class="nav-cta">Join Waitlist</a>
         </div>
     </nav>
 
@@ -493,7 +493,7 @@
             <p class="hero-slogan"><em>They</em> Provide the Capital. <em>We</em> Provide the Freedom.</p>
             <p class="hero-sub">Copy trades across every prop firm account — from one dashboard, at API-level speed. No platform lock-in. No data provider restrictions. Just execution.</p>
             <div class="hero-actions">
-                <a href="https://tally.so/r/682blB" target="_blank" class="btn-primary">Join the Early Bird Waitlist →</a>
+                <a href="javascript:void(0)" onclick="openWaitlist()" class="btn-primary">Join the Early Bird Waitlist →</a>
                 <a href="#features" class="btn-secondary">See How It Works</a>
             </div>
             <div class="hero-stats">
@@ -640,7 +640,7 @@
                     <li>Smart instrument mapping</li>
                     <li class="disabled">Multi-group management</li>
                 </ul>
-                <a href="https://tally.so/r/682blB" target="_blank" class="pricing-btn">Join Waitlist →</a>
+                <a href="javascript:void(0)" onclick="openWaitlist()" class="pricing-btn">Join Waitlist →</a>
             </div>
             <!-- PRO -->
             <div class="pricing-card featured reveal">
@@ -660,7 +660,7 @@
                     <li>Smart instrument mapping</li>
                     <li>5-level kill hierarchy</li>
                 </ul>
-                <a href="https://tally.so/r/682blB" target="_blank" class="pricing-btn primary-btn">Join Waitlist →</a>
+                <a href="javascript:void(0)" onclick="openWaitlist()" class="pricing-btn primary-btn">Join Waitlist →</a>
             </div>
             <!-- PRO+ -->
             <div class="pricing-card reveal">
@@ -680,7 +680,7 @@
                     <li>Smart instrument mapping</li>
                     <li>5-level kill hierarchy</li>
                 </ul>
-                <a href="https://tally.so/r/682blB" target="_blank" class="pricing-btn">Join Waitlist →</a>
+                <a href="javascript:void(0)" onclick="openWaitlist()" class="pricing-btn">Join Waitlist →</a>
             </div>
             <!-- CUSTOM -->
             <div class="pricing-card reveal">
@@ -743,7 +743,7 @@
         <div class="container">
             <h2 class="reveal">Ready to Own Your Execution?</h2>
             <p class="reveal">Start your 7-day free trial. No credit card. No platform required. No lock-in. Ever.</p>
-            <a href="https://tally.so/r/682blB" target="_blank" class="btn-primary reveal" style="font-size:1.1rem; padding: 16px 40px;">Join the Early Bird Waitlist →</a>
+            <a href="javascript:void(0)" onclick="openWaitlist()" class="btn-primary reveal" style="font-size:1.1rem; padding: 16px 40px;">Join the Early Bird Waitlist →</a>
         </div>
     </section>
 
@@ -767,6 +767,59 @@
     </footer>
 
     <script>
+        /* ===== WAITLIST MODAL ===== */
+        .wl-overlay {
+            display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.7);
+            backdrop-filter: blur(6px); z-index: 10000; align-items: center; justify-content: center;
+        }
+        .wl-overlay.active { display: flex; }
+        .wl-modal {
+            background: linear-gradient(135deg, #0d1117 0%, #161b22 100%);
+            border: 1px solid rgba(0,242,255,0.2); border-radius: 16px;
+            padding: 40px; max-width: 440px; width: 90%; position: relative;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.5), 0 0 40px rgba(0,242,255,0.1);
+        }
+        .wl-close {
+            position: absolute; top: 14px; right: 18px; background: none; border: none;
+            color: #8b99a6; font-size: 1.5rem; cursor: pointer; padding: 0; line-height: 1;
+        }
+        .wl-close:hover { color: #fff; }
+        .wl-modal h3 {
+            font-size: 1.5rem; color: #fff; margin-bottom: 6px; font-weight: 800;
+        }
+        .wl-modal h3 span { color: var(--cyan); }
+        .wl-modal .wl-sub {
+            color: #8b99a6; font-size: 0.9rem; margin-bottom: 24px;
+        }
+        .wl-modal label {
+            display: block; color: #ccc; font-size: 0.85rem; font-weight: 600;
+            margin-bottom: 6px; margin-top: 16px;
+        }
+        .wl-modal input, .wl-modal select {
+            width: 100%; padding: 12px 14px; background: rgba(255,255,255,0.06);
+            border: 1px solid rgba(255,255,255,0.12); border-radius: 8px;
+            color: #fff; font-size: 0.95rem; outline: none; transition: border-color 0.3s;
+        }
+        .wl-modal input:focus, .wl-modal select:focus {
+            border-color: var(--cyan);
+        }
+        .wl-modal input::placeholder { color: rgba(255,255,255,0.35); }
+        .wl-modal select option { background: #161b22; color: #fff; }
+        .wl-submit {
+            width: 100%; margin-top: 24px; padding: 14px; border: none; border-radius: 8px;
+            background: linear-gradient(135deg, var(--cyan), var(--blue));
+            color: #0a0a1a; font-size: 1rem; font-weight: 700; cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .wl-submit:hover { transform: translateY(-2px); box-shadow: 0 6px 24px rgba(0,242,255,0.3); }
+        .wl-privacy {
+            text-align: center; color: #555; font-size: 0.75rem; margin-top: 12px;
+        }
+        .wl-success { display: none; text-align: center; padding: 30px 0; }
+        .wl-success .wl-check { font-size: 3rem; margin-bottom: 12px; }
+        .wl-success h3 { color: var(--cyan); margin-bottom: 8px; }
+        .wl-success p { color: #8b99a6; font-size: 0.95rem; }
+
         /* ===== SCROLL REVEAL ===== */
         const reveals = document.querySelectorAll('.reveal');
         const observer = new IntersectionObserver((entries) => {
@@ -785,6 +838,75 @@
                 const isOpen = item.classList.contains('open');
                 document.querySelectorAll('.faq-item.open').forEach(i => i.classList.remove('open'));
                 if (!isOpen) item.classList.add('open');
+            });
+        });
+    </script>
+    <!-- ===== WAITLIST MODAL ===== -->
+    <div class="wl-overlay" id="wlOverlay">
+        <div class="wl-modal">
+            <button class="wl-close" onclick="closeWaitlist()">✕</button>
+            <div id="wlForm">
+                <h3>Join the <span>Early Bird</span> List</h3>
+                <p class="wl-sub">Lock in 35% off for life. Be first when we launch.</p>
+                <form id="kitForm" action="https://app.kit.com/forms/9094788/subscriptions" method="post" data-sv-form="9094788" data-uid="4ef27f345e">
+                    <label for="wlEmail">Email *</label>
+                    <input type="email" id="wlEmail" name="email_address" placeholder="your@email.com" required>
+                    <label for="wlName">Name</label>
+                    <input type="text" id="wlName" name="fields[first_name]" placeholder="Your name">
+                    <label for="wlTier">Which tier interests you?</label>
+                    <select id="wlTier" name="fields[tier_interest]">
+                        <option value="">Select one...</option>
+                        <option value="Starter">Starter — $19.47/mo</option>
+                        <option value="Pro">Pro — $32.47/mo</option>
+                        <option value="Pro+">Pro+ — $58.47/mo</option>
+                        <option value="Not sure">Not sure yet</option>
+                    </select>
+                    <button type="submit" class="wl-submit">Reserve My Early Bird Spot →</button>
+                </form>
+                <p class="wl-privacy">We respect your privacy. Unsubscribe anytime.</p>
+            </div>
+            <div class="wl-success" id="wlSuccess">
+                <div class="wl-check">✓</div>
+                <h3>You're on the list!</h3>
+                <p>We'll notify you the moment OrderClone launches.<br>Check your email to confirm your spot.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function openWaitlist() {
+            document.getElementById('wlOverlay').classList.add('active');
+            document.getElementById('wlForm').style.display = 'block';
+            document.getElementById('wlSuccess').style.display = 'none';
+            document.body.style.overflow = 'hidden';
+        }
+        function closeWaitlist() {
+            document.getElementById('wlOverlay').classList.remove('active');
+            document.body.style.overflow = '';
+        }
+        // Close on overlay click
+        document.getElementById('wlOverlay').addEventListener('click', function(e) {
+            if (e.target === this) closeWaitlist();
+        });
+        // Close on Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') closeWaitlist();
+        });
+        // Handle form submission
+        document.getElementById('kitForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const form = this;
+            const data = new FormData(form);
+            fetch(form.action, {
+                method: 'POST',
+                body: data,
+                headers: { 'Accept': 'application/json' }
+            }).then(function() {
+                document.getElementById('wlForm').style.display = 'none';
+                document.getElementById('wlSuccess').style.display = 'block';
+            }).catch(function() {
+                document.getElementById('wlForm').style.display = 'none';
+                document.getElementById('wlSuccess').style.display = 'block';
             });
         });
     </script>
